@@ -1,0 +1,85 @@
+Table countries {
+  id int [pk, increment]
+  name varchar
+  code varchar
+}
+
+Table cities {
+  id int [pk, increment]
+  name varchar
+}
+
+Table airports {
+  id int [pk, increment]
+  name varchar
+  code varchar
+  city_id int
+  country_id int
+}
+
+Ref: airports.country_id > countries.id
+Ref: airports.city_id > cities.id 
+
+Table airlines {
+  id int [pk, increment]
+  name varchar
+}
+
+Table fligths {
+  id int [pk, increment]
+  number varchar
+  airline_id int
+  aircraft_id int
+  airport_origin ing
+  airport_destination int
+  departure_time timestamp
+  arrival_time timestamp
+  price float
+  refundable boolean
+  include_food boolean
+  scheedule varchar
+}
+
+Ref: fligths.airline_id > airlines.id 
+Ref: fligths.aircraft_id > aircrafts.id 
+Ref: fligths.airport_origin > airports.id 
+Ref: fligths.airport_destination > airports.id
+
+Table aircrafts {
+  id int [pk, increment]
+  name varchar
+  seats int
+  airline_id int
+}
+
+Ref: aircrafts.airline_id > airlines.id 
+
+Table passangers {
+  id int [pk, increment]
+  first_name varchar
+  last_name varchar
+  passport varchar
+}
+
+
+Table  booking_status {
+  id int [pk, increment]
+  description varchar
+}
+
+Table bookings {
+  id int [pk, increment]
+  passanger_id int
+  fligth_id int
+  airport_origin int
+  airport_destination int
+  status_id int
+  cration_date timestamp
+}
+
+Ref: bookings.passanger_id > passangers.id 
+Ref: bookings.fligth_id > fligths.id 
+Ref: bookings.airport_origin > airports.id 
+Ref: bookings.airport_destination > airports.id
+Ref: bookings.status_id > booking_status.id 
+ 
