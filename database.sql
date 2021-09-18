@@ -161,7 +161,35 @@ ALTER TABLE `bookings` ADD FOREIGN KEY (`seats_type`) REFERENCES `seat_types` (`
 
 ALTER TABLE `bookings` ADD FOREIGN KEY (`terminal_id`) REFERENCES `airport_terminals` (`id`);
 
-/* INSERT ENTRIES ON AIRCRAFT MANUFACTURERS */
+/* ========================================== */
+/* INSERT ENTRIES ON AIRLINES TABLE */
+/* ========================================== */
+INSERT INTO `airlines` (`name`,`IATA_code`) VALUES 
+('American Airlines','AA'),
+('CargoItalia','2G'),
+('Continental Airlines','CO'),
+('American Airlines','DL'),
+('Northwest Airlines','NW'),
+('Air Canada','AC'),
+('United Airlines Cargo','UA'),
+('Canadian Airlines Int´l','CP'),
+('Fedex','FX'),
+('Alaska Airlines','AS'),
+('VARIG Brazilian Airlines','RG'),
+('LAN Chile','LA'),
+('Aer Lingus Cargo','EL'),
+('Alitalia','AZ'),
+('Air France','AF'),
+('Indian Airlines','IC'),
+('Cielos Airlines','A2'),
+('Ukraine Int´l Airlines','PS'),
+('Air Moldova','9U'),
+('Biman Bangladesh','BG'),
+('Air China','CA');
+
+/* ========================================== */
+/* INSERT ENTRIES ON AIRCRAFT MANUFACTURERS TABLE */
+/* ========================================== */
 INSERT INTO `aircraft_manufacturers` (`name`) VALUES 
 ('Airbus'),
 ('Antonov'),
@@ -172,7 +200,9 @@ INSERT INTO `aircraft_manufacturers` (`name`) VALUES
 ('Embraer'),
 ('Mitsubishi Aircraft Corporation');
 
-/* INSERT ENTRIES ON AIRCRAFT MODELS */
+/* ========================================== */
+/* INSERT ENTRIES ON AIRCRAFT MODELS TABLE */
+/* ========================================== */
 INSERT INTO `aircraft_models` (`aircraft_manufacture`, `model`) VALUES 
 (1,'A321'),
 (1,'A330'),
