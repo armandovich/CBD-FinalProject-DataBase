@@ -1,80 +1,137 @@
 Table countries {
   id int [pk, increment]
-  name varchar
-  code varchar
+  name varchar [not null, unique]
+  ISO_code varchar [not null, unique]
 }
 
 Table cities {
   id int [pk, increment]
-  name varchar
+  name varchar [not null]
 }
 
 Table airports {
   id int [pk, increment]
-  name varchar
-  code varchar
-  city_id int
+  name varchar [not null]
+  code varchar [not null, unique]
   country_id int
+  city_id int
 }
 
 Ref: airports.country_id > countries.id
 Ref: airports.city_id > cities.id 
 
+Table airport_terminals {
+  id int [pk, increment]
+  number varchar [not null]
+  gate varchar [not null]
+  airporty_id int
+}
+
+Ref: airport_terminals.airporty_id > airports.id 
+
 Table airlines {
   id int [pk, increment]
-  name varchar
+  name varchar [not null]
+  IATA_code varchar [not null, unique]
+}
+
+Table fligth_types {
+  id int [pk, increment]
+  description varchar
+}
+
+Table fligth_schedules {
+  id int [pk, increment]
+  day varchar [not null, unique]
 }
 
 Table fligths {
   id int [pk, increment]
-  number varchar
-  airline_id int
-  aircraft_id int
-  airport_origin ing
-  airport_destination int
-  departure_time timestamp
-  arrival_time timestamp
-  price float
+  fligth_number varchar [not null, unique]
+  aircraft_id int [not null]
+  airline_id int [not null]
+  airport_origin int [not null]
+  airport_destination int [not null]
+  departure_time timestamp [not null]
+  arrival_time timestamp [not null]
+  fligth_duration timestamp
+  price float [not null]
   refundable boolean
   include_food boolean
-  scheedule varchar
+  fligth_type int
+  schedule_id int [not null]
 }
 
 Ref: fligths.airline_id > airlines.id 
 Ref: fligths.aircraft_id > aircrafts.id 
 Ref: fligths.airport_origin > airports.id 
 Ref: fligths.airport_destination > airports.id
+Ref: fligths.fligth_type > fligth_types.id
+Ref: fligths.schedule_id > fligth_schedules.id
+
+Table aircraft_manufacturers {
+  id int [pk, increment]
+  name varchar [not null, unique]
+}
+
+Table aircraft_models {
+  id int [pk, increment]
+  aircraft_manufacture int
+  model varchar [not null, unique]
+}
+
+Ref: aircraft_models.aircraft_manufacture > aircraft_manufacturers.id 
 
 Table aircrafts {
   id int [pk, increment]
-  name varchar
-  seats int
-  airline_id int
+  aircraft_model int [not null]
+  airline_id int [not null]
 }
 
+Ref: aircrafts.aircraft_model > aircraft_models.id 
 Ref: aircrafts.airline_id > airlines.id 
+
+Table seat_types {
+  id int [pk, increment]
+  description varchar [not null]
+}
+
+Table seats {
+  id int [pk, increment]
+  seats_amount int [not null]
+  seat_type int [not null]
+  aircraft_model int [not null]
+}
+
+Ref: seats.aircraft_model > aircraft_models.id 
+Ref: seats.seat_type > seat_types.id 
 
 Table passangers {
   id int [pk, increment]
-  first_name varchar
-  last_name varchar
-  passport varchar
+  first_name varchar [not null]
+  last_name varchar [not null]
+  passport varchar [not null, unique]
+  email varchar
+  phone_number varchar [not null]
 }
 
 
 Table  booking_status {
   id int [pk, increment]
-  description varchar
+  description varchar [not null]
 }
 
 Table bookings {
   id int [pk, increment]
-  passanger_id int
-  fligth_id int
-  airport_origin int
-  airport_destination int
-  status_id int
-  cration_date timestamp
+  passanger_id int [not null]
+  seats_type int [not null]
+  terminal_id varchar [not null]
+  fligth_id int [not null]
+  airport_origin int [not null]
+  airport_destination int [not null]
+  bording_time timestamp [not null]
+  fligth_date timestamp [not null]
+  status_id int [not null]
 }
 
 Ref: bookings.passanger_id > passangers.id 
@@ -82,4 +139,5 @@ Ref: bookings.fligth_id > fligths.id
 Ref: bookings.airport_origin > airports.id 
 Ref: bookings.airport_destination > airports.id
 Ref: bookings.status_id > booking_status.id 
- 
+Ref: bookings.seats_type > seat_types.id 
+Ref: bookings.terminal_id > airport_terminals.id 
