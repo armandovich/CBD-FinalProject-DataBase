@@ -171,3 +171,29 @@ INSERT INTO `aircraft_manufacturers` (`name`) VALUES
 ('Comac'),
 ('Embraer'),
 ('Mitsubishi Aircraft Corporation');
+
+/* INSERT ENTRIES ON AIRCRAFT MODELS */
+INSERT INTO `aircraft_models` (`aircraft_manufacture`, `model`) VALUES 
+(1,'A321'),
+(1,'A330'),
+(1,'A340'),
+(1,'A350'),
+(2,'An-148'),
+(2,'An-24'),
+(2,'An-140'),
+(2,'An-28'),
+(2,'An-10'),
+(3,'42'),
+(3,'72'),
+(4,'737'),
+(4,'747'),
+(4,'767'),
+(4,'777'),
+(4,'787'),
+(5,'415'),
+(5,'CRJ 1000'),
+(5,'CRJ 200'),
+(5,'CRJ 550'),
+(5,'CRJ 700'),
+(6,'ARJ-21'),
+(6,'C919');
