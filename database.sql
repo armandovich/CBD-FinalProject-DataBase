@@ -306,3 +306,93 @@ INSERT INTO `flight_schedules` (`day`) VALUES
 ('Thursday'),
 ('Friday'),
 ('Saturday');
+
+/* ========================================== */
+/* INSERT ENTRIES ON SEAT_TYPES TABLE */
+/* ========================================== */
+INSERT INTO 'seat_types' (description) VALUES
+('Economy'),
+('Premium'),
+('Economy'),
+('Buisness'),
+('Buisness'),
+('Premium'),
+('First-Class'),
+('First-Class'),
+('Economy'),
+('Economy'),
+('Economy'),
+('Economy'),
+('Premium'),
+('Premium'),
+('Buisness'),
+('Premium'),
+('Economy'),
+('Economy'),
+('First-Class'),
+('First-Class'),
+('First-Class'),
+('Premium'),
+('Premium'),
+('Buisness'),
+('Buisness');
+
+/* ========================================== */
+/* INSERT ENTRIES ON SEATS TABLE */
+/* ========================================== */
+INSERT INTO 'seats' (seats_amount, seat_type, aircraft_model) VALUES
+(150, 1, 1),
+(180, 2, 2),
+(200, 3, 3),
+(50, 4, 4),
+(180, 5, 5),
+(80, 6, 6),
+(90, 7, 7),
+(70, 8, 8),
+(50, 9, 9),
+(50, 10, 10),
+(250, 11, 11),
+(240, 12, 12),
+(140, 13, 13),
+(250, 14, 14),
+(100, 15, 15),
+(110, 16, 16),
+(90, 17, 17),
+(100, 18, 18),
+(190, 19, 19),
+(220, 20, 20),
+(50, 21, 21),
+(50, 22, 22),
+(70, 23, 23),
+(110, 24, 24),
+(120, 25, 25);
+
+
+/* ========================================== */
+/* INSERT ENTRIES ON FLIGHT_TYPES TABLE */
+/* ========================================== */
+INSERT INTO 'flight_types' (description) VALUES
+('Domestic'),
+('Domestic'),
+('International'),
+('International'),
+('International'),
+('International'),
+('International'),
+('Domestic'),
+('Domestic'),
+('Domestic'),
+('Domestic'),
+('International'),
+('Domestic'),
+('International'),
+('Domestic'),
+('Domestic'),
+('International'),
+('Domestic'),
+('Domestic'),
+('International'),
+('Domestic'),
+('Domestic'),
+('International'),
+('International');
