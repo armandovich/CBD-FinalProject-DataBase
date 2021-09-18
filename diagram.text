@@ -35,19 +35,19 @@ Table airlines {
   IATA_code varchar [not null, unique]
 }
 
-Table fligth_types {
+Table flight_types {
   id int [pk, increment]
   description varchar
 }
 
-Table fligth_schedules {
+Table flight_schedules {
   id int [pk, increment]
   day varchar [not null, unique]
 }
 
-Table fligths {
+Table flights {
   id int [pk, increment]
-  fligth_number varchar [not null, unique]
+  flight_number varchar [not null, unique]
   aircraft_id int [not null]
   airline_id int [not null]
   airport_origin int [not null]
@@ -58,16 +58,16 @@ Table fligths {
   price float [not null]
   refundable boolean
   include_food boolean
-  fligth_type int
-  schedule_id int [not null]
+  flight_type int
+  fligtht_schedule int [not null]
 }
 
-Ref: fligths.airline_id > airlines.id 
-Ref: fligths.aircraft_id > aircrafts.id 
-Ref: fligths.airport_origin > airports.id 
-Ref: fligths.airport_destination > airports.id
-Ref: fligths.fligth_type > fligth_types.id
-Ref: fligths.schedule_id > fligth_schedules.id
+Ref: flights.airline_id > airlines.id 
+Ref: flights.aircraft_id > aircrafts.id 
+Ref: flights.airport_origin > airports.id 
+Ref: flights.airport_destination > airports.id
+Ref: flights.flight_type > flight_types.id
+Ref: flights.fligtht_schedule > flight_schedules.id
 
 Table aircraft_manufacturers {
   id int [pk, increment]
@@ -106,7 +106,7 @@ Table seats {
 Ref: seats.aircraft_model > aircraft_models.id 
 Ref: seats.seat_type > seat_types.id 
 
-Table passangers {
+Table passengers {
   id int [pk, increment]
   first_name varchar [not null]
   last_name varchar [not null]
@@ -123,10 +123,10 @@ Table  booking_status {
 
 Table bookings {
   id int [pk, increment]
-  passanger_id int [not null]
+  passenger_id int [not null]
   seats_type int [not null]
   terminal_id varchar [not null]
-  fligth_id int [not null]
+  flight_id int [not null]
   airport_origin int [not null]
   airport_destination int [not null]
   bording_time timestamp [not null]
@@ -134,8 +134,8 @@ Table bookings {
   status_id int [not null]
 }
 
-Ref: bookings.passanger_id > passangers.id 
-Ref: bookings.fligth_id > fligths.id 
+Ref: bookings.passenger_id > passengers.id 
+Ref: bookings.flight_id > flights.id 
 Ref: bookings.airport_origin > airports.id 
 Ref: bookings.airport_destination > airports.id
 Ref: bookings.status_id > booking_status.id 

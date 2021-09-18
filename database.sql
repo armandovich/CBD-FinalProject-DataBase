@@ -3,7 +3,6 @@ DROP DATABASE IF EXISTS `airlines_database`;
 CREATE DATABASE `airlines_database`;
 
 USE `airlines_database`;
-
 CREATE TABLE `countries` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255) UNIQUE NOT NULL,
@@ -36,19 +35,19 @@ CREATE TABLE `airlines` (
   `IATA_code` varchar(255) UNIQUE NOT NULL
 );
 
-CREATE TABLE `fligth_types` (
+CREATE TABLE `flight_types` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `description` varchar(255)
 );
 
-CREATE TABLE `fligth_schedules` (
+CREATE TABLE `flight_schedules` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `day` varchar(255) UNIQUE NOT NULL
 );
 
-CREATE TABLE `fligths` (
+CREATE TABLE `flights` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `fligth_number` varchar(255) UNIQUE NOT NULL,
+  `flight_number` varchar(255) UNIQUE NOT NULL,
   `aircraft_id` int NOT NULL,
   `airline_id` int NOT NULL,
   `airport_origin` int NOT NULL,
@@ -59,8 +58,8 @@ CREATE TABLE `fligths` (
   `price` float NOT NULL,
   `refundable` boolean,
   `include_food` boolean,
-  `fligth_type` int,
-  `schedule_id` int NOT NULL
+  `flight_type` int,
+  `fligtht_schedule` int NOT NULL
 );
 
 CREATE TABLE `aircraft_manufacturers` (
@@ -92,7 +91,7 @@ CREATE TABLE `seats` (
   `aircraft_model` int NOT NULL
 );
 
-CREATE TABLE `passangers` (
+CREATE TABLE `passengers` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
@@ -108,10 +107,10 @@ CREATE TABLE `booking_status` (
 
 CREATE TABLE `bookings` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `passanger_id` int NOT NULL,
+  `passenger_id` int NOT NULL,
   `seats_type` int NOT NULL,
   `terminal_id` varchar(255) NOT NULL,
-  `fligth_id` int NOT NULL,
+  `flight_id` int NOT NULL,
   `airport_origin` int NOT NULL,
   `airport_destination` int NOT NULL,
   `bording_time` timestamp NOT NULL,
@@ -125,17 +124,17 @@ ALTER TABLE `airports` ADD FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`);
 
 ALTER TABLE `airport_terminals` ADD FOREIGN KEY (`airporty_id`) REFERENCES `airports` (`id`);
 
-ALTER TABLE `fligths` ADD FOREIGN KEY (`airline_id`) REFERENCES `airlines` (`id`);
+ALTER TABLE `flights` ADD FOREIGN KEY (`airline_id`) REFERENCES `airlines` (`id`);
 
-ALTER TABLE `fligths` ADD FOREIGN KEY (`aircraft_id`) REFERENCES `aircrafts` (`id`);
+ALTER TABLE `flights` ADD FOREIGN KEY (`aircraft_id`) REFERENCES `aircrafts` (`id`);
 
-ALTER TABLE `fligths` ADD FOREIGN KEY (`airport_origin`) REFERENCES `airports` (`id`);
+ALTER TABLE `flights` ADD FOREIGN KEY (`airport_origin`) REFERENCES `airports` (`id`);
 
-ALTER TABLE `fligths` ADD FOREIGN KEY (`airport_destination`) REFERENCES `airports` (`id`);
+ALTER TABLE `flights` ADD FOREIGN KEY (`airport_destination`) REFERENCES `airports` (`id`);
 
-ALTER TABLE `fligths` ADD FOREIGN KEY (`fligth_type`) REFERENCES `fligth_types` (`id`);
+ALTER TABLE `flights` ADD FOREIGN KEY (`flight_type`) REFERENCES `flight_types` (`id`);
 
-ALTER TABLE `fligths` ADD FOREIGN KEY (`schedule_id`) REFERENCES `fligth_schedules` (`id`);
+ALTER TABLE `flights` ADD FOREIGN KEY (`fligtht_schedule`) REFERENCES `flight_schedules` (`id`);
 
 ALTER TABLE `aircraft_models` ADD FOREIGN KEY (`aircraft_manufacture`) REFERENCES `aircraft_manufacturers` (`id`);
 
@@ -147,9 +146,9 @@ ALTER TABLE `seats` ADD FOREIGN KEY (`aircraft_model`) REFERENCES `aircraft_mode
 
 ALTER TABLE `seats` ADD FOREIGN KEY (`seat_type`) REFERENCES `seat_types` (`id`);
 
-ALTER TABLE `bookings` ADD FOREIGN KEY (`passanger_id`) REFERENCES `passangers` (`id`);
+ALTER TABLE `bookings` ADD FOREIGN KEY (`passenger_id`) REFERENCES `passengers` (`id`);
 
-ALTER TABLE `bookings` ADD FOREIGN KEY (`fligth_id`) REFERENCES `fligths` (`id`);
+ALTER TABLE `bookings` ADD FOREIGN KEY (`flight_id`) REFERENCES `flights` (`id`);
 
 ALTER TABLE `bookings` ADD FOREIGN KEY (`airport_origin`) REFERENCES `airports` (`id`);
 
@@ -160,6 +159,8 @@ ALTER TABLE `bookings` ADD FOREIGN KEY (`status_id`) REFERENCES `booking_status`
 ALTER TABLE `bookings` ADD FOREIGN KEY (`seats_type`) REFERENCES `seat_types` (`id`);
 
 ALTER TABLE `bookings` ADD FOREIGN KEY (`terminal_id`) REFERENCES `airport_terminals` (`id`);
+
+
 
 /* ========================================== */
 /* INSERT ENTRIES ON AIRLINES TABLE */
@@ -293,3 +294,15 @@ INSERT INTO `airports` (`name`,`code`,`country_id`,`city_id`) VALUES
 ('Narita International Airport','NRT',9,12),
 ('Kyiv Boryspil International Airport','KBP',10,13),
 ('Miami International Airport','MIA',11,14);
+
+/* ========================================== */
+/* INSERT ENTRIES ON FLIGTH_SCHEDULES TABLE */
+/* ========================================== */
+INSERT INTO `flight_schedules` (`day`) VALUES 
+('Sunday'),
+('Monday'),
+('Tuesday'),
+('Wednesday'),
+('Thursday'),
+('Friday'),
+('Saturday');
