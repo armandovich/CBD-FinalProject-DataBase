@@ -26,7 +26,7 @@ CREATE TABLE `airport_terminals` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `number` varchar(255) NOT NULL,
   `gate` varchar(255) NOT NULL,
-  `airporty_id` int
+  `airport_id` int
 );
 
 CREATE TABLE `airlines` (
@@ -54,12 +54,12 @@ CREATE TABLE `flights` (
   `airport_destination` int NOT NULL,
   `departure_time` timestamp NOT NULL,
   `arrival_time` timestamp NOT NULL,
-  `fligth_duration` timestamp,
+  `flight_duration` timestamp,
   `price` float NOT NULL,
   `refundable` boolean,
   `include_food` boolean,
   `flight_type` int,
-  `fligtht_schedule` int NOT NULL
+  `flight_schedule` int NOT NULL
 );
 
 CREATE TABLE `aircraft_manufacturers` (
@@ -114,7 +114,7 @@ CREATE TABLE `bookings` (
   `airport_origin` int NOT NULL,
   `airport_destination` int NOT NULL,
   `bording_time` timestamp NOT NULL,
-  `fligth_date` timestamp NOT NULL,
+  `flight_date` timestamp NOT NULL,
   `status_id` int NOT NULL
 );
 
@@ -122,7 +122,7 @@ ALTER TABLE `airports` ADD FOREIGN KEY (`country_id`) REFERENCES `countries` (`i
 
 ALTER TABLE `airports` ADD FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`);
 
-ALTER TABLE `airport_terminals` ADD FOREIGN KEY (`airporty_id`) REFERENCES `airports` (`id`);
+ALTER TABLE `airport_terminals` ADD FOREIGN KEY (`airport_id`) REFERENCES `airports` (`id`);
 
 ALTER TABLE `flights` ADD FOREIGN KEY (`airline_id`) REFERENCES `airlines` (`id`);
 
@@ -134,7 +134,7 @@ ALTER TABLE `flights` ADD FOREIGN KEY (`airport_destination`) REFERENCES `airpor
 
 ALTER TABLE `flights` ADD FOREIGN KEY (`flight_type`) REFERENCES `flight_types` (`id`);
 
-ALTER TABLE `flights` ADD FOREIGN KEY (`fligtht_schedule`) REFERENCES `flight_schedules` (`id`);
+ALTER TABLE `flights` ADD FOREIGN KEY (`flight_schedule`) REFERENCES `flight_schedules` (`id`);
 
 ALTER TABLE `aircraft_models` ADD FOREIGN KEY (`aircraft_manufacture`) REFERENCES `aircraft_manufacturers` (`id`);
 
@@ -296,7 +296,7 @@ INSERT INTO `airports` (`name`,`code`,`country_id`,`city_id`) VALUES
 ('Miami International Airport','MIA',11,14);
 
 /* ========================================== */
-/* INSERT ENTRIES ON FLIGTH_SCHEDULES TABLE */
+/* INSERT ENTRIES ON FLIGHT_SCHEDULES TABLE */
 /* ========================================== */
 INSERT INTO `flight_schedules` (`day`) VALUES 
 ('Sunday'),
