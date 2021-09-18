@@ -255,3 +255,22 @@ INSERT INTO `countries` (`name`, `ISO_code`) VALUES
 ('Spain','ESP'),
 ('Ukraine','UKR'),
 ('United States of America','USA');
+
+/* ========================================== */
+/* INSERT ENTRIES ON CITIES TABLE */
+/* ========================================== */
+INSERT INTO `cities` (`name`) VALUES 
+('Toronto'),
+('Havana'),
+('Santo Domingo'),
+('Punta Cana'),
+('París'),
+('Berlín'),
+('Mumbai'),
+('Delhi'),
+('Florencia'),
+('Roma'),
+('Madrid'),
+('Tokio'),
+('Kiev'),
+('Miami');
