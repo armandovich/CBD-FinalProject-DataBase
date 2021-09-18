@@ -160,3 +160,14 @@ ALTER TABLE `bookings` ADD FOREIGN KEY (`status_id`) REFERENCES `booking_status`
 ALTER TABLE `bookings` ADD FOREIGN KEY (`seats_type`) REFERENCES `seat_types` (`id`);
 
 ALTER TABLE `bookings` ADD FOREIGN KEY (`terminal_id`) REFERENCES `airport_terminals` (`id`);
+
+/* INSERT ENTRIES ON AIRCRAFT MANUFACTURERS */
+INSERT INTO `aircraft_manufacturers` (`name`) VALUES 
+('Airbus'),
+('Antonov'),
+('ATR Aircraft'),
+('Boeing'),
+('Bombardier Aerospace'),
+('Comac'),
+('Embraer'),
+('Mitsubishi Aircraft Corporation');
