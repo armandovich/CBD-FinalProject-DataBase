@@ -274,3 +274,22 @@ INSERT INTO `cities` (`name`) VALUES
 ('Tokio'),
 ('Kiev'),
 ('Miami');
+
+/* ========================================== */
+/* INSERT ENTRIES ON AIRPORTS TABLE */
+/* ========================================== */
+INSERT INTO `airports` (`name`,`code`,`country_id`,`city_id`) VALUES 
+('Billy Bishop Toronto City Airport','YTZ',1,1),
+('José Martí International Airport','HAV',2,2),
+('Aeropuerto Internacional de Las Américas','SDQ',3,3),
+('Aeropuerto Internacional de Punta Cana','PUJ',3,4),
+('Paris Charles de Gaulle Airport','CDG',4,5),
+('Berlin Schönefeld Airport','SXF',5,6),
+('Chhatrapati Shivaji Maharaj International Airport','BOM',6,7),
+('Indira Gandhi International Airport','DEL',6,8),
+('Florence Airport','FLR',7,9),
+('Rome Ciampino Giovan Battista Pastine Airport','CIA',7,10),
+('Madrid-Barajas Adolfo Suárez Airport','MAD',8,11),
+('Narita International Airport','NRT',9,12),
+('Kyiv Boryspil International Airport','KBP',10,13),
+('Miami International Airport','MIA',11,14);
