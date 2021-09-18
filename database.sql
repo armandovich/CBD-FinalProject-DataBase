@@ -238,3 +238,20 @@ INSERT INTO `aircrafts` (`airline_id`, `aircraft_model`) VALUES
 (5,3),(5,3),(5,4),(5,4),(5,11),
 (8,1),(8,1),(8,12),(8,12),(8,15),
 (18,1),(18,1),(18,8),(18,6),(18,6);
+
+
+/* ========================================== */
+/* INSERT ENTRIES ON COUNTRIES TABLE */
+/* ========================================== */
+INSERT INTO `countries` (`name`, `ISO_code`) VALUES 
+('Canada','CAN'),
+('Cuba','CUB'),
+('Dominican Republic','DOM'),
+('France','FRA'),
+('Germany','DEU'),
+('India','IND'),
+('Italy','ITA'),
+('Japan','JPN'),
+('Spain','ESP'),
+('Ukraine','UKR'),
+('United States of America','USA');
