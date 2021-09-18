@@ -396,3 +396,33 @@ INSERT INTO 'flight_types' (description) VALUES
 ('Domestic'),
 ('International'),
 ('International');
+
+/* ========================================== */
+/* INSERT ENTRIES ON PASSENGERS TABLE */
+/* ========================================== */
+INSERT INTO 'Passengers' (first_name, last_name, passport, email, phone_number) VALUES
+('Simranjit', 'Singh', 'T0437188', 'Simranjit.contact@gmail.com', '7696161979'),
+('Daniel', 'Miolan', 'I0894659', 'Miolan98@gmail.com', '8097952129'),
+('Pawan', 'Kumar', 'V0654155', 'Pawan55@gmail.com', '4379854051'),
+('Amritpal', 'Singh', 'W0465135', 'Amrit45@gmail.com', '7837564789'),
+('Taylor', 'Swift', 'T0786999', 'Taylor13@gmail.com', '7696131313'),
+('Joe', 'Alwyn', 'W0645132', 'Hannah98@gmail.com', '7894641525'),
+('Selena', 'Gomez', 'X0786999', 'Selena89@gmail.com', '1876495873'),
+('Hannah', 'Montana', 'U0895697', 'Hannah98@gmail.com', '1578648913'),
+('Emily', 'Osment', 'G0457961', 'Emily46@gmail.com', '1979865152'),
+('Jason', 'Earles', 'S0648794', 'Jason_earles@gmail.com', '7974646465'),
+('Miley', 'Cyrus', 'H0487156', 'Miley_1992@gmail.com', '7846531136'),
+('Jack', 'Harlow', 'J0578645', 'Jack_h98@gmail.com', '7453645134'),
+('Quenlin', 'Blackwell', 'T0487219', 'Quen_black786@gmail.com', '5254681535'),
+('Rudy', 'Mustang', 'H0784692', 'Rudy.mustang@gmail.com', '8465134634'),
+('Danny', 'Gonzalez', 'K0189731', 'Danny_gonz@gmail.com', '8451313464'),
+('Drew', 'Gooden', 'L0463161', 'Drew_texas@gmail.com', '6465416319'),
+('Michael', 'Reeves', 'G0956238', 'Michael_reeee@gmail.com', '5415364889'),
+('William', 'Osman', 'W0653285', 'William.biz@gmail.com', '8453215688'),
+('Lily', 'Pichu', 'S0451325','Lilly_art@gmail.com', '9846514682'),
+('Manpreet', 'Singh', 'A0645154', 'Manpreetsingh258@gmail.com', '8745125468'),
+('Amanpreet', 'Singh', 'Z0596564', 'Singhamanpreet96@gmail.com', '7846513468'),
+('Rahul', 'Kumar', 'N0465312', 'Rahul54@gmail.com', '5412548564'),
+('Yvonne', 'Nigel', 'M0456132', 'Yvonne1998@gmail.com', '5725486464'),
+('Jake', 'Ryan', 'R0846518', 'Jake_ny@gmail.com', '8641495655'),
+('Alex', 'Apollonov', 'X0794687', 'Alex_australia@gmail.com', '6476546135');
