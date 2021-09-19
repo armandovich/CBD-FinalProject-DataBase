@@ -45,9 +45,9 @@ CREATE TABLE flights (
   airline_id int NOT NULL,
   airport_origin int NOT NULL,
   airport_destination int NOT NULL,
-  departure_time timestamp NOT NULL,
-  arrival_time timestamp NOT NULL,
-  flight_duration timestamp,
+  departure_time time NOT NULL,
+  arrival_time time NOT NULL,
+  flight_duration time,
   price float NOT NULL,
   refundable boolean,
   include_food boolean,
@@ -365,7 +365,7 @@ INSERT INTO flight_types (description) VALUES
 /* ========================================== */
 /* INSERT ENTRIES ON PASSENGERS TABLE */
 /* ========================================== */
-INSERT INTO Passengers (first_name, last_name, passport, email, phone_number) VALUES
+INSERT INTO passengers (first_name, last_name, passport, email, phone_number) VALUES
 ('Simranjit', 'Singh', 'T0437188', 'Simranjit.contact@gmail.com', '7696161979'),
 ('Daniel', 'Miolan', 'I0894659', 'Miolan98@gmail.com', '8097952129'),
 ('Pawan', 'Kumar', 'V0654155', 'Pawan55@gmail.com', '4379854051'),
@@ -391,3 +391,19 @@ INSERT INTO Passengers (first_name, last_name, passport, email, phone_number) VA
 ('Yvonne', 'Nigel', 'M0456132', 'Yvonne1998@gmail.com', '5725486464'),
 ('Jake', 'Ryan', 'R0846518', 'Jake_ny@gmail.com', '8641495655'),
 ('Alex', 'Apollonov', 'X0794687', 'Alex_australia@gmail.com', '6476546135');
+
+
+INSERT INTO flights (flight_number, aircraft_id, airline_id, airport_origin, airport_destination, departure_time,arrival_time,flight_duration,price,refundable,include_food,flight_type,flight_schedule) VALUES
+('CA001',23,8,3,1,'09:00:00','13:00:00','04:00:00',720,false,false,2,1),
+('CA002',23,8,3,1,'09:00:00','13:00:00','04:00:00',720,false,false,2,2),
+('CA003',23,8,3,1,'09:00:00','13:00:00','04:00:00',720,false,false,2,3),
+('CA004',23,8,3,1,'09:00:00','13:00:00','04:00:00',720,false,false,2,4),
+('CA005',23,8,3,1,'09:00:00','13:00:00','04:00:00',720,false,false,2,5),
+('CA006',23,8,3,1,'09:00:00','13:00:00','04:00:00',720,false,false,2,6),
+('CA007',23,8,3,1,'09:00:00','13:00:00','04:00:00',720,false,false,2,7),
+('CU001',1,1,3,2,'10:00:00','11:00:00','01:00:00',200,true,false,2,2),
+('CU002',1,1,3,2,'10:00:00','11:00:00','01:00:00',200,true,false,2,4),
+('CU003',1,1,3,2,'10:00:00','11:00:00','01:00:00',200,true,false,2,6),
+('CA201',6,2,2,1,'12:00:00','15:00:00','03:00:00',300,false,false,2,2),
+('CA202',6,2,2,1,'12:00:00','15:00:00','03:00:00',300,false,false,2,4),
+('CA203',6,2,2,1,'12:00:00','15:00:00','03:00:00',300,false,false,2,6);
