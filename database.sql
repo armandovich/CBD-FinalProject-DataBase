@@ -1,171 +1,158 @@
-DROP DATABASE IF EXISTS `airlines_database`;
+DROP DATABASE IF EXISTS airlines_database;
 
-CREATE DATABASE `airlines_database`;
+CREATE DATABASE airlines_database;
 
-USE `airlines_database`;
-CREATE TABLE `countries` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `name` varchar(255) UNIQUE NOT NULL,
-  `ISO_code` varchar(255) UNIQUE NOT NULL
+USE airlines_database;
+CREATE TABLE countries (
+  id int PRIMARY KEY AUTO_INCREMENT,
+  name varchar(255) UNIQUE NOT NULL,
+  ISO_code varchar(255) UNIQUE NOT NULL
 );
 
-CREATE TABLE `cities` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL
+CREATE TABLE cities (
+  id int PRIMARY KEY AUTO_INCREMENT,
+  name varchar(255) NOT NULL
 );
 
-CREATE TABLE `airports` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `code` varchar(255) UNIQUE NOT NULL,
-  `country_id` int,
-  `city_id` int
+CREATE TABLE airports (
+  id int PRIMARY KEY AUTO_INCREMENT,
+  name varchar(255) NOT NULL,
+  code varchar(255) UNIQUE NOT NULL,
+  country_id int,
+  city_id int
 );
 
-CREATE TABLE `airport_terminals` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `number` varchar(255) NOT NULL,
-  `gate` varchar(255) NOT NULL,
-  `airport_id` int
+CREATE TABLE airlines (
+  id int PRIMARY KEY AUTO_INCREMENT,
+  name varchar(255) NOT NULL,
+  IATA_code varchar(255) UNIQUE NOT NULL
 );
 
-CREATE TABLE `airlines` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `IATA_code` varchar(255) UNIQUE NOT NULL
+CREATE TABLE flight_types (
+  id int PRIMARY KEY AUTO_INCREMENT,
+  description varchar(255)
 );
 
-CREATE TABLE `flight_types` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `description` varchar(255)
+CREATE TABLE flight_schedules (
+  id int PRIMARY KEY AUTO_INCREMENT,
+  day varchar(255) UNIQUE NOT NULL
 );
 
-CREATE TABLE `flight_schedules` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `day` varchar(255) UNIQUE NOT NULL
+CREATE TABLE flights (
+  id int PRIMARY KEY AUTO_INCREMENT,
+  flight_number varchar(255) UNIQUE NOT NULL,
+  aircraft_id int NOT NULL,
+  airline_id int NOT NULL,
+  airport_origin int NOT NULL,
+  airport_destination int NOT NULL,
+  departure_time timestamp NOT NULL,
+  arrival_time timestamp NOT NULL,
+  flight_duration timestamp,
+  price float NOT NULL,
+  refundable boolean,
+  include_food boolean,
+  flight_type int,
+  flight_schedule int NOT NULL
 );
 
-CREATE TABLE `flights` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `flight_number` varchar(255) UNIQUE NOT NULL,
-  `aircraft_id` int NOT NULL,
-  `airline_id` int NOT NULL,
-  `airport_origin` int NOT NULL,
-  `airport_destination` int NOT NULL,
-  `departure_time` timestamp NOT NULL,
-  `arrival_time` timestamp NOT NULL,
-  `flight_duration` timestamp,
-  `price` float NOT NULL,
-  `refundable` boolean,
-  `include_food` boolean,
-  `flight_type` int,
-  `flight_schedule` int NOT NULL
+CREATE TABLE aircraft_manufacturers (
+  id int PRIMARY KEY AUTO_INCREMENT,
+  name varchar(255) UNIQUE NOT NULL
 );
 
-CREATE TABLE `aircraft_manufacturers` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `name` varchar(255) UNIQUE NOT NULL
+CREATE TABLE aircraft_models (
+  id int PRIMARY KEY AUTO_INCREMENT,
+  aircraft_manufacture int,
+  model varchar(255) UNIQUE NOT NULL
 );
 
-CREATE TABLE `aircraft_models` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `aircraft_manufacture` int,
-  `model` varchar(255) UNIQUE NOT NULL
+CREATE TABLE aircrafts (
+  id int PRIMARY KEY AUTO_INCREMENT,
+  aircraft_model int NOT NULL,
+  airline_id int NOT NULL
 );
 
-CREATE TABLE `aircrafts` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `aircraft_model` int NOT NULL,
-  `airline_id` int NOT NULL
+CREATE TABLE seat_types (
+  id int PRIMARY KEY AUTO_INCREMENT,
+  description varchar(255) NOT NULL
 );
 
-CREATE TABLE `seat_types` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `description` varchar(255) NOT NULL
+CREATE TABLE seats (
+  id int PRIMARY KEY AUTO_INCREMENT,
+  seats_amount int NOT NULL,
+  seat_type int NOT NULL,
+  aircraft_model int NOT NULL
 );
 
-CREATE TABLE `seats` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `seats_amount` int NOT NULL,
-  `seat_type` int NOT NULL,
-  `aircraft_model` int NOT NULL
+CREATE TABLE passengers (
+  id int PRIMARY KEY AUTO_INCREMENT,
+  first_name varchar(255) NOT NULL,
+  last_name varchar(255) NOT NULL,
+  passport varchar(255) UNIQUE NOT NULL,
+  email varchar(255),
+  phone_number varchar(255) NOT NULL
 );
 
-CREATE TABLE `passengers` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
-  `passport` varchar(255) UNIQUE NOT NULL,
-  `email` varchar(255),
-  `phone_number` varchar(255) NOT NULL
+CREATE TABLE booking_status (
+  id int PRIMARY KEY AUTO_INCREMENT,
+  description varchar(255) NOT NULL
 );
 
-CREATE TABLE `booking_status` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `description` varchar(255) NOT NULL
+CREATE TABLE bookings (
+  id int PRIMARY KEY AUTO_INCREMENT,
+  passenger_id int NOT NULL,
+  seats_type int NOT NULL,
+  terminal_id varchar(255) NOT NULL,
+  flight_id int NOT NULL,
+  airport_origin int NOT NULL,
+  airport_destination int NOT NULL,
+  bording_time timestamp NOT NULL,
+  flight_date timestamp NOT NULL,
+  status_id int NOT NULL
 );
 
-CREATE TABLE `bookings` (
-  `id` int PRIMARY KEY AUTO_INCREMENT,
-  `passenger_id` int NOT NULL,
-  `seats_type` int NOT NULL,
-  `terminal_id` varchar(255) NOT NULL,
-  `flight_id` int NOT NULL,
-  `airport_origin` int NOT NULL,
-  `airport_destination` int NOT NULL,
-  `bording_time` timestamp NOT NULL,
-  `flight_date` timestamp NOT NULL,
-  `status_id` int NOT NULL
-);
+ALTER TABLE airports ADD FOREIGN KEY (country_id) REFERENCES countries (id);
 
-ALTER TABLE `airports` ADD FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`);
+ALTER TABLE airports ADD FOREIGN KEY (city_id) REFERENCES cities (id);
 
-ALTER TABLE `airports` ADD FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`);
+ALTER TABLE flights ADD FOREIGN KEY (airline_id) REFERENCES airlines (id);
 
-ALTER TABLE `airport_terminals` ADD FOREIGN KEY (`airport_id`) REFERENCES `airports` (`id`);
+ALTER TABLE flights ADD FOREIGN KEY (aircraft_id) REFERENCES aircrafts (id);
 
-ALTER TABLE `flights` ADD FOREIGN KEY (`airline_id`) REFERENCES `airlines` (`id`);
+ALTER TABLE flights ADD FOREIGN KEY (airport_origin) REFERENCES airports (id);
 
-ALTER TABLE `flights` ADD FOREIGN KEY (`aircraft_id`) REFERENCES `aircrafts` (`id`);
+ALTER TABLE flights ADD FOREIGN KEY (airport_destination) REFERENCES airports (id);
 
-ALTER TABLE `flights` ADD FOREIGN KEY (`airport_origin`) REFERENCES `airports` (`id`);
+ALTER TABLE flights ADD FOREIGN KEY (flight_type) REFERENCES flight_types (id);
 
-ALTER TABLE `flights` ADD FOREIGN KEY (`airport_destination`) REFERENCES `airports` (`id`);
+ALTER TABLE flights ADD FOREIGN KEY (flight_schedule) REFERENCES flight_schedules (id);
 
-ALTER TABLE `flights` ADD FOREIGN KEY (`flight_type`) REFERENCES `flight_types` (`id`);
+ALTER TABLE aircraft_models ADD FOREIGN KEY (aircraft_manufacture) REFERENCES aircraft_manufacturers (id);
 
-ALTER TABLE `flights` ADD FOREIGN KEY (`flight_schedule`) REFERENCES `flight_schedules` (`id`);
+ALTER TABLE aircrafts ADD FOREIGN KEY (aircraft_model) REFERENCES aircraft_models (id);
 
-ALTER TABLE `aircraft_models` ADD FOREIGN KEY (`aircraft_manufacture`) REFERENCES `aircraft_manufacturers` (`id`);
+ALTER TABLE aircrafts ADD FOREIGN KEY (airline_id) REFERENCES airlines (id);
 
-ALTER TABLE `aircrafts` ADD FOREIGN KEY (`aircraft_model`) REFERENCES `aircraft_models` (`id`);
+ALTER TABLE seats ADD FOREIGN KEY (aircraft_model) REFERENCES aircraft_models (id);
 
-ALTER TABLE `aircrafts` ADD FOREIGN KEY (`airline_id`) REFERENCES `airlines` (`id`);
+ALTER TABLE seats ADD FOREIGN KEY (seat_type) REFERENCES seat_types (id);
 
-ALTER TABLE `seats` ADD FOREIGN KEY (`aircraft_model`) REFERENCES `aircraft_models` (`id`);
+ALTER TABLE bookings ADD FOREIGN KEY (passenger_id) REFERENCES passengers (id);
 
-ALTER TABLE `seats` ADD FOREIGN KEY (`seat_type`) REFERENCES `seat_types` (`id`);
+ALTER TABLE bookings ADD FOREIGN KEY (flight_id) REFERENCES flights (id);
 
-ALTER TABLE `bookings` ADD FOREIGN KEY (`passenger_id`) REFERENCES `passengers` (`id`);
+ALTER TABLE bookings ADD FOREIGN KEY (airport_origin) REFERENCES airports (id);
 
-ALTER TABLE `bookings` ADD FOREIGN KEY (`flight_id`) REFERENCES `flights` (`id`);
+ALTER TABLE bookings ADD FOREIGN KEY (airport_destination) REFERENCES airports (id);
 
-ALTER TABLE `bookings` ADD FOREIGN KEY (`airport_origin`) REFERENCES `airports` (`id`);
+ALTER TABLE bookings ADD FOREIGN KEY (status_id) REFERENCES booking_status (id);
 
-ALTER TABLE `bookings` ADD FOREIGN KEY (`airport_destination`) REFERENCES `airports` (`id`);
-
-ALTER TABLE `bookings` ADD FOREIGN KEY (`status_id`) REFERENCES `booking_status` (`id`);
-
-ALTER TABLE `bookings` ADD FOREIGN KEY (`seats_type`) REFERENCES `seat_types` (`id`);
-
-ALTER TABLE `bookings` ADD FOREIGN KEY (`terminal_id`) REFERENCES `airport_terminals` (`id`);
-
-
+ALTER TABLE bookings ADD FOREIGN KEY (seats_type) REFERENCES seat_types (id);
 
 /* ========================================== */
 /* INSERT ENTRIES ON AIRLINES TABLE */
 /* ========================================== */
-INSERT INTO `airlines` (`name`,`IATA_code`) VALUES 
+INSERT INTO airlines (name,IATA_code) VALUES 
 ('American Airlines','AA'),
 ('CargoItalia','2G'),
 ('Continental Airlines','CO'),
@@ -173,7 +160,7 @@ INSERT INTO `airlines` (`name`,`IATA_code`) VALUES
 ('Northwest Airlines','NW'),
 ('Air Canada','AC'),
 ('United Airlines Cargo','UA'),
-('Canadian Airlines Int´l','CP'),
+('Canadian Airlines','CP'),
 ('Fedex','FX'),
 ('Alaska Airlines','AS'),
 ('VARIG Brazilian Airlines','RG'),
@@ -191,7 +178,7 @@ INSERT INTO `airlines` (`name`,`IATA_code`) VALUES
 /* ========================================== */
 /* INSERT ENTRIES ON AIRCRAFT MANUFACTURERS TABLE */
 /* ========================================== */
-INSERT INTO `aircraft_manufacturers` (`name`) VALUES 
+INSERT INTO aircraft_manufacturers (name) VALUES 
 ('Airbus'),
 ('Antonov'),
 ('ATR Aircraft'),
@@ -204,7 +191,7 @@ INSERT INTO `aircraft_manufacturers` (`name`) VALUES
 /* ========================================== */
 /* INSERT ENTRIES ON AIRCRAFT MODELS TABLE */
 /* ========================================== */
-INSERT INTO `aircraft_models` (`aircraft_manufacture`, `model`) VALUES 
+INSERT INTO aircraft_models (aircraft_manufacture, model) VALUES 
 (1,'A321'),
 (1,'A330'),
 (1,'A340'),
@@ -232,19 +219,42 @@ INSERT INTO `aircraft_models` (`aircraft_manufacture`, `model`) VALUES
 /* ========================================== */
 /* INSERT ENTRIES ON AIRCRAFT TABLE */
 /* ========================================== */
-INSERT INTO `aircrafts` (`airline_id`, `aircraft_model`) VALUES 
-(1,1),(1,1),(1,2),(1,4),(1,4),
-(2,1),(2,1),(2,1),(2,18),(2,1),
-(4,20),(4,13),(4,13),(4,2),(4,13),
-(5,3),(5,3),(5,4),(5,4),(5,11),
-(8,1),(8,1),(8,12),(8,12),(8,15),
-(18,1),(18,1),(18,8),(18,6),(18,6);
-
+INSERT INTO aircrafts (airline_id, aircraft_model) VALUES 
+(1,1),
+(1,1),
+(1,2),
+(1,4),
+(1,4),
+(2,1),
+(2,1),
+(2,1),
+(2,18),
+(2,1),
+(4,20),
+(4,13),
+(4,13),
+(4,2),
+(4,13),
+(5,3),
+(5,3),
+(5,4),
+(5,4),
+(5,11),
+(8,1),
+(8,1),
+(8,12),
+(8,12),
+(8,15),
+(18,1),
+(18,1),
+(18,8),
+(18,6),
+(18,6);
 
 /* ========================================== */
 /* INSERT ENTRIES ON COUNTRIES TABLE */
 /* ========================================== */
-INSERT INTO `countries` (`name`, `ISO_code`) VALUES 
+INSERT INTO countries (name, ISO_code) VALUES 
 ('Canada','CAN'),
 ('Cuba','CUB'),
 ('Dominican Republic','DOM'),
@@ -260,7 +270,7 @@ INSERT INTO `countries` (`name`, `ISO_code`) VALUES
 /* ========================================== */
 /* INSERT ENTRIES ON CITIES TABLE */
 /* ========================================== */
-INSERT INTO `cities` (`name`) VALUES 
+INSERT INTO cities (name) VALUES 
 ('Toronto'),
 ('Havana'),
 ('Santo Domingo'),
@@ -279,7 +289,7 @@ INSERT INTO `cities` (`name`) VALUES
 /* ========================================== */
 /* INSERT ENTRIES ON AIRPORTS TABLE */
 /* ========================================== */
-INSERT INTO `airports` (`name`,`code`,`country_id`,`city_id`) VALUES 
+INSERT INTO airports (name,code,country_id,city_id) VALUES 
 ('Billy Bishop Toronto City Airport','YTZ',1,1),
 ('José Martí International Airport','HAV',2,2),
 ('Aeropuerto Internacional de Las Américas','SDQ',3,3),
@@ -298,7 +308,7 @@ INSERT INTO `airports` (`name`,`code`,`country_id`,`city_id`) VALUES
 /* ========================================== */
 /* INSERT ENTRIES ON FLIGHT_SCHEDULES TABLE */
 /* ========================================== */
-INSERT INTO `flight_schedules` (`day`) VALUES 
+INSERT INTO flight_schedules (day) VALUES 
 ('Sunday'),
 ('Monday'),
 ('Tuesday'),
@@ -310,97 +320,52 @@ INSERT INTO `flight_schedules` (`day`) VALUES
 /* ========================================== */
 /* INSERT ENTRIES ON SEAT_TYPES TABLE */
 /* ========================================== */
-INSERT INTO 'seat_types' (description) VALUES
+INSERT INTO seat_types (description) VALUES
 ('Economy'),
-('Premium'),
-('Economy'),
-('Buisness'),
-('Buisness'),
-('Premium'),
-('First-Class'),
-('First-Class'),
-('Economy'),
-('Economy'),
-('Economy'),
-('Economy'),
-('Premium'),
 ('Premium'),
 ('Buisness'),
-('Premium'),
-('Economy'),
-('Economy'),
-('First-Class'),
-('First-Class'),
-('First-Class'),
-('Premium'),
-('Premium'),
-('Buisness'),
-('Buisness');
+('First-Class');
 
 /* ========================================== */
 /* INSERT ENTRIES ON SEATS TABLE */
 /* ========================================== */
-INSERT INTO 'seats' (seats_amount, seat_type, aircraft_model) VALUES
+INSERT INTO seats (seats_amount, seat_type, aircraft_model) VALUES
 (150, 1, 1),
-(180, 2, 2),
-(200, 3, 3),
-(50, 4, 4),
-(180, 5, 5),
-(80, 6, 6),
-(90, 7, 7),
-(70, 8, 8),
-(50, 9, 9),
-(50, 10, 10),
-(250, 11, 11),
-(240, 12, 12),
-(140, 13, 13),
-(250, 14, 14),
-(100, 15, 15),
-(110, 16, 16),
-(90, 17, 17),
-(100, 18, 18),
-(190, 19, 19),
-(220, 20, 20),
-(50, 21, 21),
-(50, 22, 22),
-(70, 23, 23),
-(110, 24, 24),
-(120, 25, 25);
+(180, 1, 2),
+(200, 1, 3),
+(50, 1, 4),
+(180, 1, 5),
+(80, 1, 6),
+(90, 1, 7),
+(70, 1, 8),
+(50, 1, 9),
+(50, 1, 10),
+(250, 1, 11),
+(240, 1, 12),
+(140, 1, 13),
+(250, 1, 14),
+(100, 1, 15),
+(110, 1, 16),
+(90, 1, 17),
+(100, 1, 18),
+(190, 1, 19),
+(220, 2, 20),
+(50, 2, 21),
+(50, 2, 22),
+(70, 2, 23);
 
 
 /* ========================================== */
 /* INSERT ENTRIES ON FLIGHT_TYPES TABLE */
 /* ========================================== */
-INSERT INTO 'flight_types' (description) VALUES
+INSERT INTO flight_types (description) VALUES
 ('Domestic'),
-('Domestic'),
-('International'),
-('International'),
-('International'),
-('International'),
-('International'),
-('Domestic'),
-('Domestic'),
-('Domestic'),
-('Domestic'),
-('International'),
-('Domestic'),
-('International'),
-('Domestic'),
-('Domestic'),
-('International'),
-('Domestic'),
-('Domestic'),
-('International'),
-('Domestic'),
-('Domestic'),
-('International'),
 ('International');
 
 /* ========================================== */
 /* INSERT ENTRIES ON PASSENGERS TABLE */
 /* ========================================== */
-INSERT INTO 'Passengers' (first_name, last_name, passport, email, phone_number) VALUES
+INSERT INTO Passengers (first_name, last_name, passport, email, phone_number) VALUES
 ('Simranjit', 'Singh', 'T0437188', 'Simranjit.contact@gmail.com', '7696161979'),
 ('Daniel', 'Miolan', 'I0894659', 'Miolan98@gmail.com', '8097952129'),
 ('Pawan', 'Kumar', 'V0654155', 'Pawan55@gmail.com', '4379854051'),
