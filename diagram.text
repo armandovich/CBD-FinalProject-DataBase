@@ -20,15 +20,6 @@ Table airports {
 Ref: airports.country_id > countries.id
 Ref: airports.city_id > cities.id 
 
-Table airport_terminals {
-  id int [pk, increment]
-  number varchar [not null]
-  gate varchar [not null]
-  airporty_id int
-}
-
-Ref: airport_terminals.airporty_id > airports.id 
-
 Table airlines {
   id int [pk, increment]
   name varchar [not null]
@@ -52,9 +43,9 @@ Table flights {
   airline_id int [not null]
   airport_origin int [not null]
   airport_destination int [not null]
-  departure_time timestamp [not null]
-  arrival_time timestamp [not null]
-  fligth_duration timestamp
+  departure_time time [not null]
+  arrival_time time [not null]
+  fligth_duration time
   price float [not null]
   refundable boolean
   include_food boolean
@@ -125,7 +116,6 @@ Table bookings {
   id int [pk, increment]
   passenger_id int [not null]
   seats_type int [not null]
-  terminal_id varchar [not null]
   flight_id int [not null]
   airport_origin int [not null]
   airport_destination int [not null]
@@ -140,4 +130,3 @@ Ref: bookings.airport_origin > airports.id
 Ref: bookings.airport_destination > airports.id
 Ref: bookings.status_id > booking_status.id 
 Ref: bookings.seats_type > seat_types.id 
-Ref: bookings.terminal_id > airport_terminals.id 
