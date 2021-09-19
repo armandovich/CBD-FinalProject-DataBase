@@ -407,3 +407,26 @@ INSERT INTO flights (flight_number, aircraft_id, airline_id, airport_origin, air
 ('CA201',6,2,2,1,'12:00:00','15:00:00','03:00:00',300,false,false,2,2),
 ('CA202',6,2,2,1,'12:00:00','15:00:00','03:00:00',300,false,false,2,4),
 ('CA203',6,2,2,1,'12:00:00','15:00:00','03:00:00',300,false,false,2,6);
+
+
+/* ========================================== */
+/* VISUALIZATION FOR AIRLINES AND AIRCRAFT */
+/* ========================================== */
+SELECT plane.id, CONCAT(manufacturer.name,' ',model.model), airline.id, airline.name 
+FROM aircrafts as plane 
+LEFT JOIN aircraft_models as model 
+ON plane.aircraft_model = model.id 
+LEFT JOIN aircraft_manufacturers as manufacturer
+ON model.aircraft_manufacture = manufacturer.id
+LEFT JOIN airlines as airline
+ON plane.airline_id = airline.id;
+
+/* ========================================== */
+/* VISUALIZATION FOR AIRPORTS */
+/* ========================================== */
+SELECT airport.id, CONCAT(airport.name,' - ',airport.code), country.name, city.name
+FROM airports as airport 
+LEFT JOIN countries as country
+ON airport.country_id = country.id
+LEFT JOIN cities as city
+ON airport.city_id = city.id;
