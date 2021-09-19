@@ -102,11 +102,10 @@ CREATE TABLE bookings (
   id int PRIMARY KEY AUTO_INCREMENT,
   passenger_id int NOT NULL,
   seats_type int NOT NULL,
-  terminal_id varchar(255) NOT NULL,
   flight_id int NOT NULL,
   airport_origin int NOT NULL,
   airport_destination int NOT NULL,
-  bording_time timestamp NOT NULL,
+  bording_time time NOT NULL,
   flight_date timestamp NOT NULL,
   status_id int NOT NULL
 );
@@ -392,6 +391,10 @@ INSERT INTO passengers (first_name, last_name, passport, email, phone_number) VA
 ('Jake', 'Ryan', 'R0846518', 'Jake_ny@gmail.com', '8641495655'),
 ('Alex', 'Apollonov', 'X0794687', 'Alex_australia@gmail.com', '6476546135');
 
+INSERT INTO booking_status (description) VALUES 
+('Inprogress'),
+('Complete'),
+('Cancel');
 
 INSERT INTO flights (flight_number, aircraft_id, airline_id, airport_origin, airport_destination, departure_time,arrival_time,flight_duration,price,refundable,include_food,flight_type,flight_schedule) VALUES
 ('CA001',23,8,3,1,'09:00:00','13:00:00','04:00:00',720,false,false,2,1),
@@ -408,6 +411,13 @@ INSERT INTO flights (flight_number, aircraft_id, airline_id, airport_origin, air
 ('CA202',6,2,2,1,'12:00:00','15:00:00','03:00:00',300,false,false,2,4),
 ('CA203',6,2,2,1,'12:00:00','15:00:00','03:00:00',300,false,false,2,6);
 
+INSERT INTO bookings (passenger_id, seats_type, flight_id, airport_origin, airport_destination, bording_time, flight_date, status_id) VALUES
+(1,4,1,3,1,'8:30:00','2018-01-20',2),
+(20,1,1,3,2,'8:30:00','2020-10-02',2),
+(21,1,1,3,2,'8:30:00','2002-03-11',2),
+(22,1,1,3,2,'8:30:00','2007-03-23',2),
+(23,1,1,3,2,'8:30:00','2021-01-20',2),
+(24,1,1,3,2,'8:30:00','2018-08-08',2);
 
 /* ========================================== */
 /* VISUALIZATION FOR AIRLINES AND AIRCRAFT */
