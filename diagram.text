@@ -115,7 +115,7 @@ Table  booking_status {
 Table bookings {
   id int [pk, increment]
   passenger_id int [not null]
-  seats_type int [not null]
+  seat_type int [not null]
   flight_id int [not null]
   airport_origin int [not null]
   airport_destination int [not null]
@@ -129,4 +129,4 @@ Ref: bookings.flight_id > flights.id
 Ref: bookings.airport_origin > airports.id 
 Ref: bookings.airport_destination > airports.id
 Ref: bookings.status_id > booking_status.id 
-Ref: bookings.seats_type > seat_types.id 
+Ref: bookings.seat_type > seat_types.id 
